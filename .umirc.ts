@@ -1,3 +1,4 @@
+import { LEGADO_BOOK_SOURCE_ACCESS } from './src/constants';
 import { defineConfig } from '@umijs/max';
 
 export default defineConfig({
@@ -16,18 +17,34 @@ export default defineConfig({
     },
     {
       name: '首页',
+      key: 'home',
       path: '/home',
       component: './Home',
     },
     {
-      name: '权限演示',
-      path: '/access',
-      component: './Access',
+      name: '开源阅读',
+      key: 'legado',
+      routes: [
+        {
+          name: '书源',
+          key: 'legado:book-source',
+          path: '/legado/book-source',
+          component: './Legado/BookSource',
+          access: LEGADO_BOOK_SOURCE_ACCESS,
+        },
+      ],
     },
     {
-      name: ' CRUD 示例',
-      path: '/table',
-      component: './Table',
+      name: '设置',
+      key: 'setting',
+      routes: [
+        {
+          name: 'Github',
+          key: 'setting:github',
+          path: '/setting/github',
+          component: './Setting/Github',
+        },
+      ],
     },
   ],
   npmClient: 'pnpm',

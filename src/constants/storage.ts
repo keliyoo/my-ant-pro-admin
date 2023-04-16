@@ -1,0 +1,1 @@
+export const STORAGE_GITHUB = 'STORAGE_GITHUB';
