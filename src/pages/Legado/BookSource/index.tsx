@@ -1,29 +1,34 @@
-import { LEGADO_BOOK_SOURCE_ACCESS } from '@/constants';
-import { getDataFromGitHub } from '@/services/github';
+import { Link } from '@umijs/max';
 import { useModel } from '@umijs/max';
-import { Form, Input } from 'antd';
-import { useEffect } from 'react';
+import { List } from 'antd';
 
 // export type BookSourceProps = {};
 
 const BookSource: React.FC = () => {
-  const { initialState } = useModel('@@initialState');
-
-  useEffect(() => {
-    if (initialState) {
-      getDataFromGitHub({
-        ...initialState,
-        path: initialState[LEGADO_BOOK_SOURCE_ACCESS],
-      }).then(console.log);
-    }
-  }, [initialState]);
+  const { loading, data } = useModel('legado');
 
   return (
-    <Form layout="vertical">
-      <Form.Item label="Field A">
-        <Input />
-      </Form.Item>
-    </Form>
+    <List
+      className="demo-loadmore-list"
+      loading={loading}
+      itemLayout="horizontal"
+      dataSource={data}
+      renderItem={(item) => (
+        <List.Item
+          actions={[
+            <Link key="list-loadmore-edit" to={`${item.id}`}>
+              编辑
+            </Link>,
+          ]}
+        >
+          <List.Item.Meta
+            title={<a href={item.bookSourceUrl}>{item.bookSourceName}</a>}
+            description={item.bookSourceComment || item.bookSourceName}
+          />
+          {/* <div>content</div> */}
+        </List.Item>
+      )}
+    />
   );
 };
 

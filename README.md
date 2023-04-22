@@ -39,3 +39,7 @@ merge
 # 回退
 revert
 ```
+
+## GitHub Api
+
+- https://docs.github.com/zh/rest/repos/contents?apiVersion=2022-11-28

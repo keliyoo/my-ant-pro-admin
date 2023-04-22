@@ -10,12 +10,18 @@ export type RequestSuccess<T = null> = {
 };
 export type RequestResult<T = null> = RequestFail | RequestSuccess<T>;
 
-const api = <T>(
+const api = <T = null>(
   input: RequestInfo | URL,
   init?: RequestInit,
 ): Promise<RequestResult<T>> =>
   fetch(input, init)
-    .then((res) => res.json())
+    .then((res) => {
+      if (res.status >= 400) {
+        throw new Error(`${res.status}`);
+      } else {
+        return res.json();
+      }
+    })
     .then(
       (res: T) =>
         ({

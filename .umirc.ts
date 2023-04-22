@@ -24,6 +24,7 @@ export default defineConfig({
     {
       name: '开源阅读',
       key: 'legado',
+      component: './Legado',
       routes: [
         {
           name: '书源',
@@ -31,6 +32,14 @@ export default defineConfig({
           path: '/legado/book-source',
           component: './Legado/BookSource',
           access: LEGADO_BOOK_SOURCE_ACCESS,
+        },
+        {
+          name: '添加书源',
+          key: 'legado:book-source:id',
+          path: '/legado/book-source/:id',
+          component: './Legado/BookSourceDetail',
+          access: LEGADO_BOOK_SOURCE_ACCESS,
+          hideInMenu: true,
         },
       ],
     },
@@ -47,5 +56,7 @@ export default defineConfig({
       ],
     },
   ],
+
   npmClient: 'pnpm',
+  tailwindcss: {},
 });

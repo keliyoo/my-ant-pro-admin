@@ -1,3 +1,5 @@
+import { LooseObject } from 'typings';
+
 export function utf8_to_b64(str: string) {
   return window.btoa(unescape(encodeURIComponent(str)));
 }
@@ -16,3 +18,9 @@ export const jsonParse = <T>(data: unknown, errorResult?: T) => {
   }
   return errorResult;
 };
+
+export const cloneDeepByJSON = (data: any[] | Record<string, any>) =>
+  JSON.parse(JSON.stringify(data));
+
+export const isEmptyObject = (data: LooseObject) =>
+  JSON.stringify(data) === '{}';
